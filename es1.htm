@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Display Name</title>
+  <title>Button Click</title>
 </head>
 <body>
   <input type="text" id="nameInput">
-  <button onclick="displayName()">Display Name</button>
-  <p id="FAI CLICK PER IL NOME"></p>
+  <button onclick="displayText()">Display Name</button>
+  <p id="output"></p>
   <script>
-    function displayName() {
-      document.getElementById('displayName').innerText = 'ALEX';
+    function displayText() {
+      document.getElementById("output").innerHTML = "alex";
     }
   </script>
 </body>
-</html>
 </html>
