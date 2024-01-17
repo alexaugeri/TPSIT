@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Sequence</title>
+</head>
+<body>
+  <input type="number" id="numInput">
+  <button onclick="printNumbers()">Print Numbers</button>
+  <p id="numberSequence"></p>
+
+  <script>
+    function printNumbers() {
+      let num = document.getElementById('numInput').value;
+      let numberSequence = '';
+      for (let i = 1; i <= num; i++) {
+        numberSequence += i + ' ';
+      }
+      numberSequence += ' ' + num * 0.1;
+      document.getElementById('numberSequence').innerHTML = numberSequence;
+    }
+  </script>
+</body>
+</html>
