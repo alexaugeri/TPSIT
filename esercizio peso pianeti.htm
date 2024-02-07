@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calcolatore di pesi dei pianeti</title>
+</head>
+<body>
+  <label for="terraPeso">Inserisci un peso terrestre: </label>
+  <input type="number" id="terraPeso">
+  <button onclick="calcolaPeso()">Calculate</button>
+  <div id="risultato"></div>
+  <p>peso su mercurio: <span id="s1"></span></p>
+  <p>peso su venere: <span id="s2"></span></p>
+  <p>peso su terra: <span id="s3"></span></p>
+  <p>peso su marte: <span id="s4"></span></p>
+  <p>peso su giove: <span id="s5"></span></p>
+  <p>peso su saturno : <span id="s6"></span></p>
+  <p>peso su urano: <span id="s7"></span></p>
+  <p>peso su nettuno: <span id="s8"></span></p>     
+  
+  <script>
+    function calcolaPeso() {
+      let terraPeso = document.getElementById('terraPeso').value;
+      let mercurioAccelerazione = 3.7;
+      let venereAccelerazione = 8.87;
+      let terraAccelerazione = 9.81;
+      let marteAccelerazione = 3.71;
+      let gioveAccelerazione = 24.79;
+      let saturnoAccelerazione = 10.44;
+      let uranoAccelerazione = 8.87;
+      let nettunoAccelerazione = 11.15;
+
+      let mercurioPeso = terraPeso * mercurioAccelerazione / 9.81;
+      let venerePeso = terraPeso * venereAccelerazione / 9.81;
+      let terraPesoOnterra = terraPeso; 
+      let martePeso = terraPeso * marteAccelerazione / 9.81;
+      let giovePeso = terraPeso * gioveAccelerazione / 9.81;
+      let saturnoPeso = terraPeso * saturnoAccelerazione / 9.81;
+      let uranoPeso = terraPeso * uranoAccelerazione / 9.81;
+      let nettunoPeso = terraPeso * nettunoAccelerazione / 9.81;
+
+      document.getElementById("s1").innerHTML = mercurioPeso
+      document.getElementById("s2").innerHTML = venerePeso
+      document.getElementById("s3").innerHTML = terraPesoOnterra
+      document.getElementById("s4").innerHTML = martePeso
+      document.getElementById("s5").innerHTML = giovePeso
+      document.getElementById("s6").innerHTML = saturnoPeso
+      document.getElementById("s7").innerHTML = uranoPeso
+      document.getElementById("s8").innerHTML = nettunoPeso
+
+
+
+
+
+    }
+  </script>
+</body>
+</html>
