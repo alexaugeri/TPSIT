@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Even Numbers Array</title>
+</head>
+<body>
+
+<script>
+// Initialize an empty array
+let evenNumbers = [];
+
+// Function to add even numbers to the array
+function addEvenNumber(number) {
+  if (number % 2 === 0) {
+    evenNumbers.push(number);
+  }
+}
+
+// Add even numbers from 0 to 20
+for (let i = 0; i <= 20; i++) {
+  addEvenNumber(i);
+}
+
+// Display the array
+console.log("Even numbers from 0 to 20:", evenNumbers);
+</script>
+
+</body>
+</html>
