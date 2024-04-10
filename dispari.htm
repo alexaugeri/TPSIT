@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap Odd Numbers Example</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mt-5">Find Odd Numbers</h1>
+        <input type="number" id="limit" class="form-control mb-5" placeholder="Enter a limit">
+        <button class="btn btn-primary mx-auto" onclick="findOddNumbers()">Find Odd Numbers</button>
+        <p class="mt-5 text-center lead" id="result"></p>
+    </div>
+
+    <script>
+        function findOddNumbers() {
+            let limit = document.getElementById("limit").value;
+            let result = [];
+            for(let i = 1; i <= limit; i += 2) {
+                result.push(i);
+            }
+            document.getElementById("result").innerHTML = "Odd numbers up to " + limit + " are: " + result.join(", ");
+        }
+    </script>
+</body>
+</html>
