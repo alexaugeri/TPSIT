@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>PROGRAMMA CHE STAMPA I DIVISORI DEI NUMERI DA 1 A 1000</h2>
+
+<button onclick="myFunction()">STAMPA I DIVISORI</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var num, i, j, output = "";
+  for(num = 1; num <= 1000; num++){
+    output += "IL DIVISORE DI " + num + " E' : ";
+    for(i = 1; i <= num; i++){
+      if(num % i == 0){
+        for(j = 1; j <= i; j++){
+          if(i % j == 0 && j < i){
+            break;
+          }
+          if(j == i){
+            output += i + " ";
+          }
+        }
+      }
+    }
+    output += "<br>";
+  }
+  document.getElementById("demo").innerHTML = output;
+}
+</script>
+
+</body>
+</html>
