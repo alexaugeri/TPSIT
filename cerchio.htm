@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcola Area Cerchio</title>
+    <style>
+        .square {
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inserisci il raggio del cerchio</h1>
+
+    <input type="number" id="raggioInput">
+    <button onclick="calcolaArea()">Calcola Area</button>
+
+    <div id="areaContainer"></div>
+
+    <script>
+        function calcolaArea() {
+            var raggio = parseFloat(document.getElementById('raggioInput').value);
+
+            if (!isNaN(raggio) && raggio > 0) {
+                var area = Math.PI * raggio * raggio; // Calcola l'area del cerchio
+
+                // Visualizza l'area
+                document.getElementById('areaContainer').innerHTML = '';
+                var areaText = document.createElement('p');
+                areaText.textContent = "L'area del cerchio è: " + area.toFixed(2);
+                document.getElementById('areaContainer').appendChild(areaText);
+
+                // Visualizza i quadrati
+                var quadratiContainer = document.createElement('div');
+                for (var i = 0; i < area; i++) {
+                    var quadrato = document.createElement('div');
+                    quadrato.className = 'square';
+                    quadratiContainer.appendChild(quadrato);
+                }
+                document.getElementById('areaContainer').appendChild(quadratiContainer);
+            } else {
+                alert("Inserisci un raggio valido.");
+            }
+        }
+    </script>
+</body>
+</html>
