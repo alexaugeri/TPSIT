@@ -6,24 +6,34 @@
 <body>
 
 <script>
-// Initialize an empty array
-let evenNumbers = [];
+// Function to initialize the even numbers array
+function generateEvenNumbersArray() {
+  // Initialize an empty array
+  let evenNumbers = [];
 
-// Function to add even numbers to the array
-function addEvenNumber(number) {
-  if (number % 2 === 0) {
-    evenNumbers.push(number);
+  // Function to add even numbers to the array
+  function addEvenNumber(number) {
+    if (number % 2 === 0) {
+      evenNumbers.push(number);
+    }
   }
+
+  // Add even numbers from 0 to 20
+  for (let i = 0; i <= 20; i++) {
+    addEvenNumber(i);
+  }
+
+  // Return the array
+  return evenNumbers;
 }
 
-// Add even numbers from 0 to 20
-for (let i = 0; i <= 20; i++) {
-  addEvenNumber(i);
-}
+// Call the function to generate the even numbers array
+let evenNumbersArray = generateEvenNumbersArray();
 
-// Display the array
-console.log("Even numbers from 0 to 20:", evenNumbers);
+// Display the array in the HTML body
+document.write("<p>Even numbers from 0 to 20: " + evenNumbersArray.join(", ") + "</p>");
 </script>
 
 </body>
 </html>
+
