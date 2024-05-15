@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incremento Numerico</title>
+</head>
+<body>
+    <h1>Incremento Numerico</h1>
+    <input type="number" id="numeroInput" min="1" placeholder="Inserisci un numero">
+    <button id="bottone1" onclick="aggiornaNumero(2)">Bottone 1</button>
+    <button id="bottone2" onclick="aggiornaNumero(3)">Bottone 2</button>
+    <button id="bottone3" onclick="aggiornaNumero(7)">Bottone 3</button>
+
+    <script>
+        var numero = 0; // Numero iniziale da incrementare
+
+        // Funzione per aggiornare il numero in base al pulsante cliccato
+        function aggiornaNumero(incremento) {
+            var numeroInserito = parseInt(document.getElementById("numeroInput").value);
+
+            if (!isNaN(numeroInserito)) { // Verifica se il valore inserito è un numero valido
+                numero += incremento; // Aggiunge l'incremento al numero
+                var risultato = numeroInserito + numero; // Calcola il risultato sommando il numero inserito con l'incremento
+                document.getElementById("numeroInput").value = risultato; // Aggiorna il valore nell'input
+            } else {
+                alert("Inserisci un numero valido.");
+            }
+        }
+    </script>
+</body>
+</html>
