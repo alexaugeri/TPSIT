@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input e Alert</title>
+</head>
+<body>
+
+  <h2>Inserisci qualcosa:</h2>
+  <input type="text" id="userInput" placeholder="Scrivi qui...">
+  <button onclick="mostraAlert()">Mostra in Alert</button>
+
+  <script>
+    function mostraAlert() {
+      // Ottieni il valore inserito nel campo di testo
+      const input = document.getElementById("userInput").value;
+      // Mostra un alert con il valore dell'input
+      alert("Hai scritto: " + input);
+    }
+  </script>
+
+</body>
+</html>
