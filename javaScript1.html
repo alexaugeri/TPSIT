@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bottoni con Alert</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .bottone {
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      color: white;
+      border: none;
+    }
+    /* Bottone 1: stile classico */
+    .bottone1 {
+      background-color: #4CAF50;
+    }
+    .bottone1:hover {
+      background-color: #45a049;
+    }
+    /* Bottone 2: stile luminoso */
+    .bottone2 {
+      background-color: #f44336;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .bottone2:hover {
+      background-color: #d32f2f;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    /* Bottone 3: stile elegante */
+    .bottone3 {
+      background-color: #008CBA;
+      font-weight: bold;
+    }
+    .bottone3:hover {
+      background-color: #007B9E;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Prova i bottoni!</h2>
+  
+  <!-- Bottone 1 -->
+  <button class="bottone bottone1" onclick="alert1()">Messaggio 1</button>
+
+  <!-- Bottone 2 -->
+  <button class="bottone bottone2" onclick="alert2()">Messaggio 2</button>
+
+  <!-- Bottone 3 -->
+  <button class="bottone bottone3" onclick="alert3()">Messaggio 3</button>
+
+  <script>
+    // Funzione per il primo bottone
+    function alert1() {
+      alert("Questo è il primo messaggio!");
+    }
+
+    // Funzione per il secondo bottone
+    function alert2() {
+      alert("Ecco il secondo messaggio, più intenso!");
+    }
+
+    // Funzione per il terzo bottone
+    function alert3() {
+      alert("Ultimo ma non meno importante, il terzo messaggio!");
+    }
+  </script>
+
+</body>
+</html>
