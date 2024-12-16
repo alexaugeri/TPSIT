@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizzatore Numeri Casuali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .output {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 20px;
+            border: 2px solid #ddd;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temporizzatore Numeri Casuali</h1>
+    <div id="output" class="output"></div>
+
+    <script>
+        // Funzione per verificare se un numero è primo
+        function isPrime(n) {
+            if (n <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+
+        // Funzione per generare un numero casuale e mostrare le informazioni
+        function generateRandomNumber() {
+            const n = Math.floor(Math.random() * 1000) + 1;
+            let output = `<h2>Numero Generato: ${n}</h2>`;
+
+            // Parità del numero
+            output += `<p>${n} è un numero ${n % 2 === 0 ? 'pari' : 'dispari'}</p>`;
+
+            // Verifica se il numero è primo
+            output += `<p>${n} è ${isPrime(n) ? 'un numero primo' : 'non un numero primo'}</p>`;
+
+            // Doppio e metà intera
+            output += `<p>Doppio di ${n}: ${n * 2}</p>`;
+            output += `<p>Metà intera di ${n}: ${Math.floor(n / 2)}</p>`;
+
+            // Complemento a 1000
+            output += `<p>Complemento di ${n} a 1000: ${1000 - n}</p>`;
+
+            // Somma con il numero precedente e successivo
+            output += `<p>Somma di ${n} con il precedente (${n - 1}) e il successivo (${n + 1}): ${n + (n - 1) + (n + 1)}</p>`;
+
+            // Moltiplicazione per 3.14
+            output += `<p>${n} moltiplicato per 3.14: ${(n * 3.14).toFixed(2)}</p>`;
+
+            // Mostra l'output
+            document.getElementById('output').innerHTML = output;
+        }
+
+        // Esegui la funzione subito e poi ogni 5 secondi
+        generateRandomNumber(); // Esegui subito la funzione per il primo numero
+        setInterval(generateRandomNumber, 5000); // Esegui ogni 5 secondi
+    </script>
+</body>
+</html>
