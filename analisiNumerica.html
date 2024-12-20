@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcoli numerici</title>
+    <style>
+        .primo {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calcoli Numerici</h1>
+    <div id="output"></div>
+
+    <script>
+        // Funzione che determina se un numero è primo
+        function isPrimo(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        // Funzione che genera tutte le informazioni richieste
+        function calcolaProprieta(num) {
+            let pariDispari = (num % 2 === 0) ? "Pari" : "Dispari";
+            let primo = isPrimo(num) ? "Primo" : "Non Primo";
+            let doppio = num * 2;
+            let meta = Math.floor(num / 2);
+            let complemento = 1000 - num;
+            let somma = (num - 1) + num + (num + 1);
+            let moltiplicazionePi = num * 3.14;
+            let moltiplicazioneE = num * 2.71;
+
+            let riga = `${num} - ${pariDispari}, ${primo}, Doppio: ${doppio}, Meta: ${meta}, Complemento: ${complemento}, Somma: ${somma}, Moltiplicato per Pi: ${moltiplicazionePi.toFixed(2)}, Moltiplicato per E: ${moltiplicazioneE.toFixed(2)}`;
+
+            return riga;
+        }
+
+        // Funzione per stampare i risultati per tutti i numeri da 1 a 10000
+        function stampaTutti() {
+            let outputDiv = document.getElementById('output');
+            let htmlContent = "";
+
+            for (let i = 1; i <= 10000; i++) {
+                let riga = calcolaProprieta(i);
+                if (isPrimo(i)) {
+                    htmlContent += `<p class="primo">${riga}</p>`;
+                } else {
+                    htmlContent += `<p>${riga}</p>`;
+                }
+            }
+
+            outputDiv.innerHTML = htmlContent;
+        }
+
+        // Chiamare la funzione per stampare i risultati
+        stampaTutti();
+    </script>
+</body>
+</html>
