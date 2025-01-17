@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morra array1</title>
+</head>
+<body>
+    <h1>MOORRA 3a-BoT</h1>
+    <p id="out1"></p>
+    <p>Morra bot tira: </p>
+    <button onclick="TiroMorraBot()">START TIRO</button>
+    <p id="out2"></p>
+
+    <h2>Fai la tua mossa:</h2>
+    <button onclick="userMove('sasso')">Sasso</button>
+    <button onclick="userMove('carta')">Carta</button>
+    <button onclick="userMove('forbice')">Forbice</button>
+
+    <h3 id="result"></h3>
+
+    <script>
+    let morraArray = ["sasso", "carta", "forbice"];
+    let userChoice = '';
+    let botChoice = '';
+
+    // Funzione per il movimento del bot
+    function TiroMorraBot() {
+        let numeroCasuale = Math.floor(Math.random() * 3);
+        botChoice = morraArray[numeroCasuale];
+        document.getElementById("out1").innerHTML = "Bot ha scelto: " + botChoice;
+    }
+
+    // Funzione per la scelta dell'utente
+    function userMove(choice) {
+        userChoice = choice;
+        document.getElementById("out2").innerHTML = "Tu hai scelto: " + userChoice;
+        TiroMorraBot(); // il bot fa la sua mossa ogni volta che l'utente sceglie
+
+        // Verifica il risultato del gioco
+        let result = checkWinner(userChoice, botChoice);
+        document.getElementById("result").innerHTML = result;
+    }
+
+    // Funzione per determinare il vincitore
+    function checkWinner(userChoice, botChoice) {
+        if (userChoice === botChoice) {
+            return "Pareggio!";
+        } else if (
+            (userChoice === "sasso" && botChoice === "forbice") ||
+            (userChoice === "carta" && botChoice === "sasso") ||
+            (userChoice === "forbice" && botChoice === "carta")
+        ) {
+            return "Hai vinto!";
+        } else {
+            return "Hai perso!";
+        }
+    }
+    </script>
+</body>
+</html>
