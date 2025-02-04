@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottoni con Data, Ora e Tempo</title>
+    <style>
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #timeDifferences {
+            margin-top: 20px;
+            font-size: 16px;
+            white-space: pre-wrap; /* Per far sì che l'output non venga troncato */
+        }
+    </style>
+</head>
+<body>
+
+    <button id="button1">Bottone 1</button>
+    <button id="button2">Bottone 2</button>
+    <button id="button3">Bottone 3</button>
+    <button id="button4">Bottone 4</button>
+
+    <div id="output"></div>
+    <div id="timeDifferences"></div>
+
+    <script>
+        const outputDiv = document.getElementById('output');
+        const timeDifferencesDiv = document.getElementById('timeDifferences');
+        let firstClickTime = null;
+        let timeDifferences = [];
+
+        function showDateTime() {
+            const now = new Date();
+            outputDiv.innerHTML = `Data e Ora: ${now.toLocaleString()}`;
+
+            // Salva il tempo al primo click
+            if (firstClickTime === null) {
+                firstClickTime = now;
+                timeDifferences = [];  // Resetta l'array al primo click
+                timeDifferencesDiv.innerHTML = '';  // Pulisce l'output precedente
+            } else {
+                // Calcola la differenza di tempo dal primo click
+                const timeDiff = now - firstClickTime; // Tempo in millisecondi
+                const seconds = (timeDiff / 1000).toFixed(3);  // Secondi, decimi e millesimi
+                timeDifferences.push(seconds);
+
+                // Mostra tutte le differenze di tempo in formato leggibile
+                timeDifferencesDiv.innerHTML = 'Tempi tra il primo click e i successivi (in secondi):\n' + timeDifferences.join('\n');
+            }
+        }
+
+        // Aggiungi un evento di click per ciascun bottone
+        document.getElementById('button1').addEventListener('click', showDateTime);
+        document.getElementById('button2').addEventListener('click', showDateTime);
+        document.getElementById('button3').addEventListener('click', showDateTime);
+        document.getElementById('button4').addEventListener('click', showDateTime);
+    </script>
+
+</body>
+</html>
