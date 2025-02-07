@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Sequenziale</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABf3C1t4H8z8yqMYy1C+jRW6u0nN8s9yl5pYl1czL/gUew+OrCXaRkfj" crossorigin="anonymous">
+    <style>
+        .btn-light {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            font-size: 24px;
+            border-radius: 10px;
+        }
+        .highlight {
+            background-color: #f39c12;
+        }
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+            justify-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center mt-5">
+        <h1 class="mb-4">Memory Sequenziale</h1>
+        <button id="start-btn" class="btn btn-primary mb-3">Inizia</button>
+        <div id="game-message" class="mb-3"></div>
+        <div id="score" class="mb-3">Punteggio: 0</div>
+        <div id="game-board" class="game-board">
+            <!-- I pulsanti verranno generati dinamicamente -->
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS e dipendenze (popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBfZ9fPp+P1o1iT0zBPzVZXyo6LOnY+V7w7FdU8+mY8xbsx2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0R4cSToAzJXhPvK/b3nD0rbXH0L/1IbcCkXJdG7Fdfp1VfN" crossorigin="anonymous"></script>
+    <script>
+        let gameSequence = [];
+        let playerSequence = [];
+        let score = 0;
+        let isGameActive = false;
+
+        const startButton = document.getElementById('start-btn');
+        const gameMessage = document.getElementById('game-message');
+        const scoreDisplay = document.getElementById('score');
+        const gameBoard = document.getElementById('game-board');
+
+        // Funzione per creare la griglia dei pulsanti
+        function createButtons() {
+            gameBoard.innerHTML = '';  // Pulisce la griglia precedente
+            for (let i = 0; i < 16; i++) {
+                const button = document.createElement('button');
+                button.classList.add('btn', 'btn-light');
+                button.setAttribute('data-id', i);
+                button.addEventListener('click', handleButtonClick);
+                gameBoard.appendChild(button);
+            }
+        }
+
+        // Funzione per gestire il click dei pulsanti
+        function handleButtonClick(event) {
+            if (!isGameActive) return;
+
+            const buttonId = parseInt(event.target.getAttribute('data-id'));
+            playerSequence.push(buttonId);
+
+            // Controllo se l'input dell'utente è corretto
+            if (playerSequence[playerSequence.length - 1] !== gameSequence[playerSequence.length - 1]) {
+                endGame('Hai sbagliato! Game Over.');
+                return;
+            }
+
+            // Se la sequenza è corretta e completa
+            if (playerSequence.length === gameSequence.length) {
+                score++;
+                updateScore();
+                playerSequence = [];
+                setTimeout(nextRound, 1000);  // Passa al prossimo turno
+            }
+        }
+
+        // Funzione per avviare il gioco
+        function startGame() {
+            gameSequence = [];
+            playerSequence = [];
+            score = 0;
+            updateScore();
+            gameMessage.textContent = 'Memorizza la sequenza!';
+            isGameActive = true;
+            nextRound();
+        }
+
+        // Funzione per passare al turno successivo
+        function nextRound() {
+            gameMessage.textContent = 'Memorizza la sequenza!';
+            const randomButton = Math.floor(Math.random() * 16);
+            gameSequence.push(randomButton);
+            showSequence();
+        }
+
+        // Funzione per visualizzare la sequenza
+        function showSequence() {
+            let index = 0;
+            const interval = setInterval(() => {
+                const button = document.querySelector(`[data-id='${gameSequence[index]}']`);
+                button.classList.add('highlight');
+                setTimeout(() => button.classList.remove('highlight'), 500);
+                index++;
+                if (index === gameSequence.length) {
+                    clearInterval(interval);
+                    gameMessage.textContent = 'Tocca i pulsanti nell\'ordine!';
+                }
+            }, 1000);
+        }
+
+        // Funzione per aggiornare il punteggio
+        function updateScore() {
+            scoreDisplay.textContent = `Punteggio: ${score}`;
+        }
+
+        // Funzione per terminare il gioco
+        function endGame(message) {
+            gameMessage.textContent = message;
+            isGameActive = false;
+            startButton.textContent = 'Ricomincia';
+        }
+
+        // Aggiungi l'evento al pulsante "Inizia"
+        startButton.addEventListener('click', () => {
+            if (isGameActive) {
+                return;
+            }
+            startButton.textContent = 'Inizia';
+            startGame();
+        });
+
+        // Inizializza la griglia dei pulsanti al caricamento della pagina
+        createButtons();
+    </script>
+</body>
+</html>
