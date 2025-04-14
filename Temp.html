@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Quadrato in movimento</title>
+  <style>
+    #container {
+      position: relative;
+      width: 400px;
+      height: 400px;
+      border: 2px solid black;
+      margin: 50px auto;
+    }
+
+    #square {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div id="container">
+  <div id="square"></div>
+</div>
+
+<script>
+  const square = document.getElementById("square");
+  const step = 2;
+  const maxX = 350;
+  const maxY = 350;
+  let posX = 0;
+  let posY = 0;
+  let direction = "right";
+
+  setInterval(() => {
+    if (direction === "right") {
+      if (posX < maxX) {
+        posX += step;
+      } else {
+        direction = "down";
+      }
+    } else if (direction === "down") {
+      if (posY < maxY) {
+        posY += step;
+      } else {
+        direction = "left";
+      }
+    } else if (direction === "left") {
+      if (posX > 0) {
+        posX -= step;
+      } else {
+        direction = "up";
+      }
+    } else if (direction === "up") {
+      if (posY > 0) {
+        posY -= step;
+      } else {
+        direction = "right";
+      }
+    }
+
+    square.style.left = posX + "px";
+    square.style.top = posY + "px";
+  }, 10); // intervallo di movimento
+</script>
+
+</body>
+</html>
