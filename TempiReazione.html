@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <title>Gioco tempi di reazione</title>
 <style>
-  /* Stile contenitore carte e tabella */
   #cards { display:flex; gap:10px; margin-top:20px; }
   .card { width:50px; height:70px; border:2px solid #333; display:flex; justify-content:center; align-items:center; font-size:24px; cursor:pointer; user-select:none; }
   #leaderboard { margin-top:20px; border-collapse:collapse; max-width:300px; }
@@ -14,6 +13,7 @@
 </head>
 <body>
 <h2>Gioco tempi di reazione</h2>
+
 <!-- Form per inserire nome -->
 <form id="form">
   Nome: <input type="text" id="name" required />
@@ -40,76 +40,60 @@ const cards = document.getElementById('cards'),
       nameInput = document.getElementById('name'),
       lbBody = document.querySelector('#leaderboard tbody');
 
-let reactionTimes = [],   // Array per salvare i tempi
-    startTime = 0,       // Tempo inizio manche
-    intervalId,          // ID intervallo
-    player = '',         // Nome giocatore corrente
-    leaderboard = [];    // Array classifica {name, time}
+let reactionTimes = [],
+    startTime = 0,
+    intervalId,
+    player = '',
+    leaderboard = [];
 
-/**
- * Genera 8 numeri unici casuali da 10 a 99
- * @returns {number[]}
- */
+// Genera 8 numeri unici casuali 10-99
 function randomNums() {
   const nums = new Set();
   while(nums.size < 8) nums.add(Math.floor(Math.random() * 90) + 10);
   return [...nums];
 }
 
-/**
- * Mostra le carte con i numeri e imposta eventi click
- */
+// Mostra le carte con numeri e imposta click
 function showCards() {
-  cards.innerHTML = '';                      // Pulisce carte vecchie
-  const nums = randomNums(),                 // Genera numeri
-        minNum = Math.min(...nums);          // Trova numero minimo
+  cards.innerHTML = '';
+  const nums = randomNums(),
+        minNum = Math.min(...nums);
 
   nums.forEach(num => {
     const c = document.createElement('div');
     c.className = 'card';
     c.textContent = num;
 
-    // Evento click sulla carta
     c.onclick = () => {
-      const reaction = Date.now() - startTime; // Calcola tempo reazione
-      if(num === minNum) {                      // Se cliccato numero corretto
-        reactionTimes.push(reaction);           // Salva tempo
-        updateTimes();                          // Aggiorna visualizzazione tempi
-        updateLeaderboard(player, reaction);   // Aggiorna classifica
-        disableCards();                         // Disabilita carte fino a nuova manche
-      } else {
-        reactionTimes = [];                      // Se errore, reset tempi
+      const reaction = Date.now() - startTime;
+      if(num === minNum) {
+        reactionTimes.push(reaction);
         updateTimes();
-        alert('Numero sbagliato! Tempi azzerati.');
+        updateLeaderboard(player, reaction);
+        disableCards();
+      } else {
+        reactionTimes = [];
+        updateTimes();
+        alert('Numero sbagliato! Tempi azzerati. Reinserisci il nome per ricominciare.');
+        resetGame();  // Mostra di nuovo il form per inserire nome e ferma il gioco
       }
     };
-
-    cards.appendChild(c);                       // Aggiunge carta al contenitore
+    cards.appendChild(c);
   });
-
-  startTime = Date.now();                       // Imposta tempo inizio manche
+  startTime = Date.now();
 }
 
-/**
- * Aggiorna lista tempi nella pagina
- */
+// Aggiorna tempi visualizzati
 function updateTimes() {
   timesSpan.textContent = reactionTimes.join(', ');
 }
 
-/**
- * Disabilita il click su tutte le carte
- */
+// Disabilita click sulle carte
 function disableCards() {
   document.querySelectorAll('.card').forEach(c => c.onclick = null);
 }
 
-/**
- * Aggiorna la classifica con nuovo tempo
- * mantiene al massimo 10 record ordinati per tempo crescente
- * @param {string} name
- * @param {number} time
- */
+// Aggiorna la classifica mantenendo massimo 10 record
 function updateLeaderboard(name, time) {
   leaderboard.push({name, time});
   leaderboard.sort((a,b) => a.time - b.time);
@@ -117,9 +101,7 @@ function updateLeaderboard(name, time) {
   renderLeaderboard();
 }
 
-/**
- * Mostra la classifica aggiornata nella tabella
- */
+// Mostra la classifica nella tabella
 function renderLeaderboard() {
   lbBody.innerHTML = '';
   leaderboard.forEach(r => {
@@ -129,23 +111,29 @@ function renderLeaderboard() {
   });
 }
 
-/**
- * Avvia il gioco con manche ogni 3 secondi
- */
+// Avvia il gioco, mostra carte ogni 3 secondi
 function startGame() {
   showCards();
   intervalId = setInterval(showCards, 3000);
 }
 
-/**
- * Gestione submit form nome
- */
+// Ferma gioco e mostra form per nuovo nome
+function resetGame() {
+  clearInterval(intervalId);   // Ferma rigenerazione carte
+  cards.innerHTML = '';        // Pulisce carte
+  form.style.display = 'block'; // Mostra form nome
+  player = '';
+}
+
+// Gestore submit form nome
 form.onsubmit = e => {
   e.preventDefault();
   const n = nameInput.value.trim();
   if(!n) return alert('Inserisci un nome valido');
   player = n;
-  form.style.display = 'none';   // Nasconde form
+  form.style.display = 'none'; // Nasconde form
+  reactionTimes = [];          // Resetta i tempi in caso di nuovo giocatore
+  updateTimes();
   startGame();
 };
 </script>
